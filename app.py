@@ -1,33 +1,16 @@
 # app.py
-from database.conexion import engine, Base, Session
-from models.producto import Producto
+from flask import Flask
+from database.conexion import engine, Base
+from routes.productos import productos_bp
+from routes.contacto import contacto_bp
+app = Flask(__name__)
 
-# Crea las tablas
+# Crea las tablas si no existen
 Base.metadata.create_all(engine)
 
-# Insertar productos de ejemplo
-session = Session()
+# Registra las rutas de productos
+app.register_blueprint(productos_bp)
+app.register_blueprint(contacto_bp)
 
-producto1 = Producto(
-    codigo="FER123",
-    marca="Truper",
-    nombre="Taladro percutor 750W",
-    modelo="TP-750",
-    stock=10,
-    precio=45990.0
-)
-
-producto2 = Producto(
-    codigo="FER456",
-    marca="Bosch",
-    nombre="Sierra circular 1400W",
-    modelo="SC-1400",
-    stock=5,
-    precio=78990.0
-)
-
-session.add_all([producto1, producto2])
-session.commit()
-session.close()
-
-print("Base de datos creada con productos de prueba.")
+if __name__ == '__main__':
+    app.run(debug=True)
