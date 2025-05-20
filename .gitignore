@@ -19,3 +19,9 @@ Thumbs.db
 # Archivos temporales de logs o pruebas
 *.log
 *.tmp
+
+#credenciales
+credenciales.txt
+
+# Evidencias
+evidencias/*
