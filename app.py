@@ -1,10 +1,12 @@
 # app.py
-from flask import Flask
+from flask import Flask, render_template
 from database.conexion import engine, Base
 from routes.productos import productos_bp
 from routes.contacto import contacto_bp
 app = Flask(__name__)
-
+@app.route('/contacto-form')
+def contacto_form():
+    return render_template('contacto.html')
 # Crea las tablas si no existen
 Base.metadata.create_all(engine)
 
