@@ -15,7 +15,7 @@ def obtener_dolar_actual():
         url = (
             f"https://si3.bcentral.cl/SieteRestWS/SieteRestWS.ashx?"
             f"user={user}&pass={password}&function=GetSeries"
-            f"&timeseries={SERIE_ID}&firstdate={hoy}&lastdate={hoy}"
+            f"&timeseries={SERIE_ID}"
         )
 
         response = requests.get(url)
