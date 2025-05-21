@@ -65,6 +65,9 @@ def confirmar_pago():
 @app.route('/exito')
 def pago_exitoso():
     return render_template('exito.html')
+@app.route('/rechazo')
+def pago_rechazado():
+    return render_template('rechazo.html')
 
 # Base de datos
 Base.metadata.create_all(engine)

@@ -20,14 +20,17 @@
 
 <script>
     const productosContainer = document.getElementById('productos');
+    let productosDisponibles = [];
 
-    // Cargar productos desde el backend
     fetch('/productos')
-        .then(res => res.json())
+        .then(response => response.json())
         .then(productos => {
+            productosDisponibles = productos;
+
             productos.forEach(prod => {
                 const card = document.createElement('div');
                 card.className = 'col-md-4';
+
                 card.innerHTML = `
                     <div class="card h-100 shadow-sm">
                         <div class="card-body">
@@ -35,14 +38,23 @@
                             <p class="card-text">
                                 Marca: <strong>${prod.marca}</strong><br>
                                 Modelo: ${prod.modelo}<br>
-                                Precio: <strong>${prod.precio.toLocaleString('es-CL')} CLP</strong><br>
-                                Stock: ${prod.stock}
+                                Stock disponible: ${prod.stock}<br>
+                                Precio: <strong>${prod.precio.toLocaleString('es-CL')} CLP</strong>
                             </p>
-                            <button class="btn btn-success w-100" onclick='agregarAlCarrito(${JSON.stringify(prod)})'>Agregar al carrito</button>
+                            <button class="btn btn-sm btn-success agregar-carrito" data-id="${prod.id}">Agregar al carrito</button>
                         </div>
                     </div>
                 `;
+
                 productosContainer.appendChild(card);
+            });
+
+            document.querySelectorAll('.agregar-carrito').forEach(boton => {
+                boton.addEventListener('click', e => {
+                    const id = parseInt(e.target.dataset.id);
+                    const producto = productosDisponibles.find(p => p.id === id);
+                    agregarAlCarrito(producto);
+                });
             });
         });
 
