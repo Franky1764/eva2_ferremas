@@ -25,6 +25,11 @@
       <!-- Carrito serializado -->
       <input type="hidden" name="carritoData" value='{{ carrito | tojson }}'>
       <button type="submit" class="btn btn-primary w-100">Pagar con Webpay</button>
+      <div class="text-center mt-4">
+        <a href="/" class="btn btn-outline-secondary">🏠 Inicio</a>
+        <a href="/carrito" class="btn btn-outline-secondary">🔙 Volver al Carrito</a>
+      </div>
+
     </form>
 
 </div>
