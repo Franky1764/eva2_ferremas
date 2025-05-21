@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, render_template
 from models.contacto import Contacto
 from database.conexion import Session
 
@@ -21,3 +21,10 @@ def recibir_contacto():
     session.close()
 
     return jsonify({"mensaje": "Consulta recibida correctamente"}), 201
+@contacto_bp.route('/mensajes', methods=['GET'])
+def ver_mensajes():
+    session = Session()
+    mensajes = session.query(Contacto).order_by(Contacto.fecha.desc()).all()
+    session.close()
+    return render_template('mensajes.html', mensajes=mensajes)
+
