@@ -28,6 +28,11 @@
 
 
     <h4>Total: <span id="total">0</span> <span id="moneda">CLP</span></h4>
+
+    <form action="/resumen-pago" method="POST">
+        <input type="hidden" id="carritoData" name="carritoData">
+        <button type="submit" class="btn btn-primary w-100 mt-3">Pagar con WebPay</button>
+    </form>
 </div>
 
 <script>
@@ -105,24 +110,34 @@
         mostrarTotal(total);
     }
 
-function mostrarTotal(totalCLP) {
-    const mostrarEnUSD = document.getElementById('toggleMoneda').checked;
+    function mostrarTotal(totalCLP) {
+        const mostrarEnUSD = document.getElementById('toggleMoneda').checked;
 
-    if (mostrarEnUSD) {
-        if (valorDolar) {
-            const totalUSD = totalCLP / valorDolar;
-            totalSpan.innerText = totalUSD.toFixed(2);
-            monedaSpan.innerText = 'USD';
+        if (mostrarEnUSD) {
+            if (valorDolar) {
+                const totalUSD = totalCLP / valorDolar;
+                totalSpan.innerText = totalUSD.toFixed(2);
+                monedaSpan.innerText = 'USD';
+            } else {
+                totalSpan.innerText = totalCLP.toLocaleString('es-CL');
+                monedaSpan.innerText = 'CLP';
+            }
         } else {
             totalSpan.innerText = totalCLP.toLocaleString('es-CL');
             monedaSpan.innerText = 'CLP';
         }
-    } else {
-        totalSpan.innerText = totalCLP.toLocaleString('es-CL');
-        monedaSpan.innerText = 'CLP';
-    }
 }
-   document.getElementById('toggleMoneda').addEventListener('change', actualizarCarrito);
+    document.getElementById('toggleMoneda').addEventListener('change', actualizarCarrito);
+    document.querySelector('form').addEventListener('submit', function(e) {
+        const carritoConCantidad = carrito.map(item => ({
+            id: item.id,
+            nombre: item.nombre,
+            cantidad: item.cantidad,
+            precio: item.precio
+        }));
+    document.getElementById('carritoData').value = JSON.stringify(carritoConCantidad);
+});
+
 
 </script>
 </body>
