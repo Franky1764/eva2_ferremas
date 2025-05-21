@@ -7,11 +7,15 @@ from transbank.webpay.webpay_plus.transaction import Transaction
 import uuid, json
 from services.pago import options
 app = Flask(__name__)
-
+@app.route('/')
+def inicio():
+    return render_template('index.html')
 @app.route('/contacto-form')
 def contacto_form():
     return render_template('contacto.html')
-
+@app.route('/catalogo')
+def catalogo():
+    return render_template('catalogo.html')
 @app.route('/carrito')
 def carrito():
     return render_template('carrito.html')
