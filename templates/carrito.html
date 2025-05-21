@@ -31,7 +31,7 @@
 
     <form action="/resumen-pago" method="POST">
         <input type="hidden" id="carritoData" name="carritoData">
-        <button type="submit" class="btn btn-primary w-100 mt-3">Pagar con WebPay</button>
+        <button id="botonPagar" type="submit" class="btn btn-primary w-100 mt-3">Pagar con WebPay</button>
     </form>
 </div>
 
@@ -108,6 +108,17 @@
         });
 
         mostrarTotal(total);
+        verificarEstadoBoton();
+
+    }
+
+    function verificarEstadoBoton() {
+        const boton = document.getElementById('botonPagar');
+        if (carrito.length === 0) {
+            boton.disabled = true;
+        } else {
+            boton.disabled = false;
+        }
     }
 
     function mostrarTotal(totalCLP) {
@@ -136,8 +147,9 @@
             precio: item.precio
         }));
     document.getElementById('carritoData').value = JSON.stringify(carritoConCantidad);
-});
 
+});
+document.addEventListener("DOMContentLoaded", verificarEstadoBoton);
 
 </script>
 </body>
