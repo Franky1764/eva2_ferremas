@@ -54,7 +54,7 @@ def confirmar_pago():
         tx = Transaction(options)
         response = tx.commit(token_ws)
         if response['status'] == 'AUTHORIZED':
-            return redirect("/exito")
+            return render_template('exito.html', transaccion=response)
         else:
             return redirect("/rechazo")
     except Exception as e:
