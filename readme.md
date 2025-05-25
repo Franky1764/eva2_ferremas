@@ -19,6 +19,9 @@ Este proyecto corresponde a la segunda etapa del proyecto semestral para la empr
 - Backend: Python + Flask
 - Frontend: HTML + Bootstrap + JS puro
 - Base de datos: SQLite + SQLAlchemy
+- Emogis: https://emojipedia.org/es/objetos
+- Pruebas: Manuales + Postman
+- Apoyo: Documentación de Python, Flask, Transbank y Banco Central, Gemini con Google y Chat GPT para revisión y consultas.
 - APIs externas:
   - [Banco Central de Chile](https://si3.bcentral.cl)
   - [Webpay Plus (Transbank Sandbox)](https://www.transbankdevelopers.cl)
@@ -37,20 +40,24 @@ Este proyecto corresponde a la segunda etapa del proyecto semestral para la empr
   pip install -r requirements.txt
 ```
 3. Agregar archivo credenciales.txt con tus datos del Banco Central:
-```css
-    usuario@ejemplo.com
-
-    contraseñaSuperSegura
 ```
-4. Ejecutar el script de carga de productos:
+usuario@ejemplo.com
+contraseñaSuperSegura
+```
+4. Agregar archivo .env, en la base del proyecto, con las credenciales de Transbank para entornos de prueba
+```
+WEBPAY_COMMERCE_CODE=
+WEBPAY_API_KEY=
+```
+5. Ejecutar el script de carga de productos:
 ```bash
   python -m scripts.cargar_productos
 ```
-5. Iniciar la aplicación:
+6. Iniciar la aplicación:
 ```bash
     python app.py
 ```
-6. Acceder a la aplicación:
+7. Acceder a la aplicación:
 
     http://127.0.0.1:5000
 
@@ -64,6 +71,8 @@ Este proyecto corresponde a la segunda etapa del proyecto semestral para la empr
 ```pgsql
 eva2_ferremas/
 ├── app.py
+├── ferremas.sql
+├── readme.md
 ├── templates/
 │   ├── index.html
 │   ├── carrito.html
@@ -82,6 +91,7 @@ eva2_ferremas/
 │   └── pago.py
 ├── database/
 │   └── conexion.py
+│   └── ferremas.db
 ├── models/
 │   ├── producto.py
 │   └── contacto.py
@@ -92,9 +102,9 @@ eva2_ferremas/
 
 ✔️ Implementación terminada
 ✔️ Webpay integrado en entorno de prueba
-✔️ Conversión monetaria funcionando
+✔️ Conversión monetaria funcionando conectada con Banco Central
 ✔️ Documentación finalizada
-✔️ Entrega lista para evaluación ✨
 
-### 📅 Última actualización: 21 de mayo de 2025
-### 💻 Desarrollado por: Daniela Castillo / Auraria✨
+
+#### 📅 Última actualización: 24 de mayo de 2025 (se exportó la BD a SQL)
+#### 💻 Desarrollado por: Daniela Castillo / Auraria✨
